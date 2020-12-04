@@ -8,9 +8,9 @@ public class ExperimentalPlane extends Plane{
     private ExperimentalTypes type;
     private ClassificationLevel classificationLevel;
 
-    public ExperimentalPlane(String model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity,
+    public ExperimentalPlane(Plane plane,
                              ExperimentalTypes type, ClassificationLevel classificationLevel) {
-        super(model, maxSpeed, maxFlightDistance, maxLoadCapacity);
+        super(plane.getModel(), plane.getMaxSpeed(), plane.getMaxFlightDistance(), plane.getMinLoadCapacity());
         this.type = type;
         this.classificationLevel = classificationLevel;
     }
