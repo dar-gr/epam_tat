@@ -4,17 +4,13 @@ import java.util.Objects;
 
 public class PassengerPlane extends Plane{
 
-    //=================FIELDS=================
     private int passengersCapacity;
 
-    //=================CONSTRUCTORS=================
     public PassengerPlane(Plane plane, int passengersCapacity) {
         super(plane.getModel(), plane.getMaxSpeed(), plane.getMaxFlightDistance(), plane.getMinLoadCapacity());
         this.passengersCapacity = passengersCapacity;
     }
 
-
-    //=================METHODS=================
     public int getPassengersCapacity() {
         return passengersCapacity;
     }

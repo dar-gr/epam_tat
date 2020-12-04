@@ -83,36 +83,28 @@ public class Airport {
         return experimentalPlanes;
     }
 
-    public Airport sortByMaxDistance() {
-        Collections.sort(planes, new Comparator<Plane>() {
+    public void sortByMaxDistance() {
+        planes.sort(new Comparator<Plane>() {
             public int compare(Plane o1, Plane o2) {
                 return o1.getMaxFlightDistance() - o2.getMaxFlightDistance();
             }
         });
-        return this;
     }
 
-
-    /**
-     * Sorts by max speed
-     * @return Airport
-     */
-    public Airport sortByMaxSpeed() {
+    public void sortByMaxSpeed() {
         Collections.sort(planes, new Comparator<Plane>() {
             public int compare(Plane o1, Plane o2) {
                 return o1.getMaxSpeed() - o2.getMaxSpeed();
             }
         });
-        return this;
     }
 
-    public Airport sortByMaxLoadCapacity() {
+    public void sortByMaxLoadCapacity() {
         Collections.sort(planes, new Comparator<Plane>() {
             public int compare(Plane o1, Plane o2) {
                 return o1.getMinLoadCapacity() - o2.getMinLoadCapacity();
             }
         });
-        return this;
     }
 
     public List<? extends Plane> getPlanes() {
@@ -134,7 +126,6 @@ public class Airport {
                 '}';
     }
 
-    //Constructor
     public Airport(List<? extends Plane> planes) {
         this.planes = planes;
     }
