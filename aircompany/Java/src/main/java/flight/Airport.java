@@ -1,10 +1,6 @@
 package flight;
 
-import flight.ExperimentalPlane;
 import models.MilitaryType;
-import flight.MilitaryPlane;
-import flight.PassengerPlane;
-import flight.Plane;
 
 import java.util.*;
 
