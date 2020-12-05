@@ -1,5 +1,3 @@
-package airport;
-
 import planes.ExperimentalPlane;
 import models.MilitaryType;
 import planes.MilitaryPlane;
