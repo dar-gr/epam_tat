@@ -30,15 +30,13 @@ public class UnrealFilterInCatalog {
                 By.xpath("//div[@class='schema-order__button js-schema-aside-open']"));
         filterDiv.click();
 
-        /*List<WebElement> sonyCheckboxes = driver.findElements(
-                By.xpath("//input[@class='i-checkbox__real'][@value='sony']"));
-        WebElement sonyCheckbox = sonyCheckboxes.get(0);
-        sonyCheckbox.click();
+        //WebElement sonyCheckbox = waitForElementsLocatedBy(driver,
+        //        By.xpath("//input[@class='i-checkbox__real'][@value='sony']")).get(0);
+        //sonyCheckbox.click();
 
-        List<WebElement> nokiaCheckboxes = driver.findElements(
-                By.xpath("//input[@class='i-checkbox__real'][@value='nokia']"));
-        WebElement nokiaCheckbox = sonyCheckboxes.get(0);
-        nokiaCheckbox.click();*/
+        //WebElement nokiaCheckbox = waitForElementsLocatedBy(driver,
+          //      By.xpath("//input[@class='i-checkbox__real'][@value='nokia']")).get(0);
+        //cnokiaCheckbox.click();
 
         WebElement maxPriceInput = waitForElementsLocatedBy(driver,
                 By.xpath("//input[@class='schema-filter-control__item schema-filter__number-input schema-filter__number-input_price']")).get(1);
