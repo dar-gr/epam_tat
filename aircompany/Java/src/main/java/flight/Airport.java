@@ -106,12 +106,6 @@ public class Airport {
         return planes;
     }
 
-    private void print(Collection<? extends Plane> collection) {
-        for (Plane plane : collection) {
-            System.out.println(plane);
-        }
-    }
-
     @Override
     public String toString() {
         return "Airport{" +
