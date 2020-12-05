@@ -1,15 +1,7 @@
-import models.ClassificationLevel;
-import models.ExperimentalTypes;
-import models.MilitaryType;
+import models.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import planes.ExperimentalPlane;
-import planes.MilitaryPlane;
-import planes.MilitaryPlane;
-import planes.PassengerPlane;
-import planes.PassengerPlane;
-import planes.Plane;
-import planes.Plane;
+import flight.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,9 +41,6 @@ public class AirportTest {
             new ExperimentalPlane(new Plane("Ryan X-13 Vertijet", 560, 307, 500),
                     ExperimentalTypes.VTOL, ClassificationLevel.TOP_SECRET)
     );
-
-
-
     Airport airport = new Airport(planes);
 
     List<MilitaryPlane> transportMilitaryPlanes = Arrays.asList(new MilitaryPlane(new Plane("C-130 Hercules", 650, 5000, 110000),

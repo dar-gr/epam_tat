@@ -1,4 +1,4 @@
-package planes;
+package flight;
 
 public class MyPlane  extends Plane {
     public MyPlane(Plane plane) {
