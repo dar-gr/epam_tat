@@ -1,4 +1,3 @@
-import Airport;
 import models.MilitaryType;
 import planes.MilitaryPlane;
 import planes.PassengerPlane;
