@@ -18,7 +18,6 @@ public class Airport {
 
 
     public List<PassengerPlane> getPassengerPlane() {
-        List<? extends Plane> planes = this.planes;
         List<PassengerPlane> passengerPlanes = new ArrayList<>();
         for (Plane plane : planes) {
             if (plane instanceof PassengerPlane) {
@@ -112,9 +111,7 @@ public class Airport {
     }
 
     private void print(Collection<? extends Plane> collection) {
-        Iterator<? extends Plane> iterator = collection.iterator();
-        while (iterator.hasNext()) {
-            Plane plane = iterator.next();
+        for (Plane plane : collection) {
             System.out.println(plane);
         }
     }

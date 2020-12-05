@@ -7,7 +7,8 @@ public class PassengerPlane extends Plane{
     private int passengersCapacity;
 
     public PassengerPlane(Plane plane, int passengersCapacity) {
-        super(plane.getModel(), plane.getMaxSpeed(), plane.getMaxFlightDistance(), plane.getMinLoadCapacity());
+        super(plane.getModel(), plane.getMaxSpeed(), plane.getMaxFlightDistance(),
+                plane.getMinLoadCapacity());
         this.passengersCapacity = passengersCapacity;
     }
 

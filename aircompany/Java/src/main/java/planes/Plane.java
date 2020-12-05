@@ -27,9 +27,7 @@ public class Plane {
         return maxFlightDistance;
     }
 
-    public int getMinLoadCapacity() {
-        return this.maxLoadCapacity;
-    }
+    public int getMinLoadCapacity() { return this.maxLoadCapacity; }
 
     @Override
     public String toString() {
