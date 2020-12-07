@@ -1,39 +1,48 @@
 package pageobject_model.page;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static pageobject_model.waits.WaitsForElements.*;
-
-public class CatalogOnlinerMobilePage {
+public class CatalogOnlinerMobilePage extends AbstractPage {
 
     private static final String MOBILEPAGE_URL = "https://catalog.onliner.by/mobile";
-    private WebDriver driver;
+    private final int WAIT_TIMEOUT_SECONDS = 10;
+
+    @FindBy(className = "schema-order__button js-schema-aside-open")
+    private WebElement filterButton;
+
+    @FindBy(className = "schema-filter-control__item schema-filter__number-input schema-filter__number-input_price")
+    private WebElement maxPriceInput;
 
     public CatalogOnlinerMobilePage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
-    }
-    public CatalogOnlinerMobilePage openPage(){
-        driver.get(MOBILEPAGE_URL);
-        new WebDriverWait(driver, 10);
-        return this;
     }
 
     public CatalogOnlinerMobilePage openFilter(){
-        WebElement filterDiv = waitForElementLocatedBy(driver,
-                By.xpath("//div[@class='schema-order__button js-schema-aside-open']"));
-        filterDiv.click();
+
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.elementToBeClickable(filterButton));
+
         return this;
     }
 
     public CatalogOnlinerMobileFilteredByMaxPricePage searchForMaxPriceFilter(String price) {
-        WebElement maxPriceInput = waitForElementsLocatedBy(driver,
-                By.xpath("//input[@class='schema-filter-control__item schema-filter__number-input schema-filter__number-input_price']")).get(1);
-        maxPriceInput.sendKeys(price);
+
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.textToBePresentInElement(maxPriceInput, price));
+
         return new CatalogOnlinerMobileFilteredByMaxPricePage(driver, price);
+    }
+
+    @Override
+    public CatalogOnlinerMobilePage openPage(){
+        driver.get(MOBILEPAGE_URL);
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        return this;
     }
 }

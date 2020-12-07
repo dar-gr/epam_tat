@@ -3,28 +3,42 @@ package pageobject_model.page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-import static pageobject_model.waits.WaitsForElements.*;
+public class CatalogOnlinerMobileFilteredByMaxPricePage extends AbstractPage{
 
-public class CatalogOnlinerMobileFilteredByMaxPricePage {
-
-    private WebDriver driver;
     private String price;
+    private final int WAIT_TIMEOUT_SECONDS = 10;
+    private static String messageClassDivXpath = "//div[@class='schema-products__message']";
+    private static String productPriceClassDivXpath = "//div[@class='schema-product__price']/a";
 
     public CatalogOnlinerMobileFilteredByMaxPricePage(WebDriver driver, String price){
-        this.driver = driver;
+        super(driver);
         this.price = price;
+        PageFactory.initElements(driver, this);
     }
 
     public List<WebElement> resultList() {
-        return waitForElementsLocatedBy(driver,
-                By.xpath("//div[@class='schema-product__price']/a"));
+        return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions
+                        .presenceOfAllElementsLocatedBy(
+                                By.xpath(productPriceClassDivXpath)));
     }
 
     public List<WebElement> noResultMessage(){
-        return waitForElementsLocatedBy(driver,
-                By.xpath("//div[@class='schema-products__message']"));
+        return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions
+                                .presenceOfAllElementsLocatedBy(
+                                        By.xpath(messageClassDivXpath)));
+    }
+
+    @Override
+    public AbstractPage openPage()
+    {
+        throw new RuntimeException("This page can't be opened without parameters!");
     }
 }

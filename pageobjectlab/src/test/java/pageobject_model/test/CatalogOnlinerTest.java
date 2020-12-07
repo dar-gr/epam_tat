@@ -1,11 +1,8 @@
 package pageobject_model.test;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -14,7 +11,7 @@ import pageobject_model.page.CatalogOnlinerMobilePage;
 
 import java.util.List;
 
-public class OnlinerCatalogTest {
+public class CatalogOnlinerTest {
 
     private WebDriver driver;
 
@@ -24,7 +21,7 @@ public class OnlinerCatalogTest {
     }
 
     @Test
-    public void resultOfUnrealFilterInCatalog() throws InterruptedException {
+    public void resultOfUnrealFilterInCatalog() {
 
         List<WebElement> expectedMessageList = new CatalogOnlinerMobilePage(driver)
                 .openPage()
