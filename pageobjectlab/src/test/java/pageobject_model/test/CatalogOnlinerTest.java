@@ -8,6 +8,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageobject_model.page.CatalogOnlinerMobilePage;
+import pageobject_model.page.CatalogOnlinerPage;
 
 import java.util.List;
 
@@ -25,10 +26,23 @@ public class CatalogOnlinerTest {
 
         List<WebElement> expectedMessageList = new CatalogOnlinerMobilePage(driver)
                 .openPage()
-                .openFilter()
+                .clickFilter()
                 .searchForMaxPriceFilter("5")
                 .noResultMessage();
         Assert.assertFalse(expectedMessageList.isEmpty());
+    }
+
+    @Test
+    public void openMobileCatalog(){
+        int actualAmountOfMobilesOnPage = 29;
+        List<WebElement> listOfMobilesOnPage = new CatalogOnlinerPage(driver)
+                .openPage()
+                .clickElectronics()
+                .moveToMobiles()
+                .clickMobiles()
+                .resultListOfMobiles();
+        int expectedAmountOfMobilesOnPage = listOfMobilesOnPage.size();
+        Assert.assertEquals(actualAmountOfMobilesOnPage, expectedAmountOfMobilesOnPage);
     }
 
     @AfterMethod (alwaysRun = true)

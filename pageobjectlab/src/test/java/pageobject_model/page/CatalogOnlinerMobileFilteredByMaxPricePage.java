@@ -12,7 +12,6 @@ import java.util.List;
 public class CatalogOnlinerMobileFilteredByMaxPricePage extends AbstractPage{
 
     private String price;
-    private final int WAIT_TIMEOUT_SECONDS = 10;
     private static String messageClassDivXpath = "//div[@class='schema-products__message']";
     private static String productPriceClassDivXpath = "//div[@class='schema-product__price']/a";
 
