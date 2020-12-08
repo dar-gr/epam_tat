@@ -25,7 +25,7 @@ public class CatalogOnlinerPage extends AbstractPage {
     public CatalogOnlinerPage moveToMobiles(){
         Actions moveToMobiles = new Actions(driver);
         String mobilesMoveXpath = "//li[@class='catalog-navigation-classifier__item catalog-navigation-classifier__item_active' and @data-id= '1']";
-        moveToMobiles.moveToElement(driver.findElement(By.xpath(mobilesMoveXpath)));
+        moveToMobiles.moveToElement(driver.findElement(By.xpath(mobilesMoveXpath))).build().perform();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
 
         return this;
