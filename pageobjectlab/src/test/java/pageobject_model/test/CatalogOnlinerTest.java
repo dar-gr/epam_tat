@@ -34,14 +34,14 @@ public class CatalogOnlinerTest {
 
     @Test
     public void openMobileCatalog(){
-        int actualAmountOfMobilesOnPage = 29;
+        int expectedAmountOfMobilesOnPage = 30;
         List<WebElement> listOfMobilesOnPage = new CatalogOnlinerPage(driver)
                 .openPage()
                 .clickElectronics()
                 .moveToMobiles()
                 .clickMobiles()
                 .resultListOfMobiles();
-        int expectedAmountOfMobilesOnPage = listOfMobilesOnPage.size();
+        int actualAmountOfMobilesOnPage = listOfMobilesOnPage.size();
         Assert.assertEquals(actualAmountOfMobilesOnPage, expectedAmountOfMobilesOnPage);
     }
 

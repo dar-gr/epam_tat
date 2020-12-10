@@ -18,7 +18,7 @@ public class CatalogOnlinerMobilePage extends AbstractPage {
     @FindBy(xpath = "//input[@class='schema-filter-control__item schema-filter__number-input schema-filter__number-input_price']")
     private List<WebElement> priceInput;
 
-    @FindBy(xpath = "//span[@data-bind='html: product.extended_name || product.full_name' and contains(text(), 'Смартфон')]")
+    @FindBy(xpath = "//span[@data-bind='html: product.extended_name || product.full_name' and (contains(text(),'Смартфон') or contains(text(), 'телефон'))]")
     private List<WebElement> listOfPageElements;
 
     public CatalogOnlinerMobilePage(WebDriver driver){
