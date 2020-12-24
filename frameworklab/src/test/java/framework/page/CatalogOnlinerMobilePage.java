@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CatalogOnlinerMobilePage extends AbstractPage {
 
@@ -33,6 +34,27 @@ public class CatalogOnlinerMobilePage extends AbstractPage {
 
     @FindBy(xpath = "//span[@data-bind='html: children.extended_name || children.full_name']")
     private List<WebElement> additionalMobileNames;
+
+    @FindBy(xpath = "//div[@class='schema-product__offers']")
+    private List<WebElement> offerButtons;
+
+    @FindBy(xpath = "//div[@class='auth-bar__item auth-bar__item--text']")
+    private WebElement signInButton;
+
+    @FindBy(xpath = "//div[@class = 'b-top-profile__item b-top-profile__item_arrow']")
+    private WebElement profileInfoButton;
+
+    @FindBy(xpath = "//div[@class='b-top-profile__name']")
+    private WebElement usernameElement;
+
+    @FindBy(xpath = "//li[@id='product-bookmark-control']")
+    private WebElement markButton;
+
+    @FindBy(xpath = "//div[@class='catalog-masthead']/h1")
+    private WebElement phoneName;
+
+    @FindBy(xpath = "//div[@class='schema-product__image']")
+    private List<WebElement> productsTitle;
 
     public CatalogOnlinerMobilePage(WebDriver driver){
         super(driver);
@@ -63,7 +85,7 @@ public class CatalogOnlinerMobilePage extends AbstractPage {
         boolean isOnlyMobiles = false;
         for (WebElement mainMobileName : mainMobileNames) {
             isOnlyMobiles = mainMobileName.getText().contains("Смартфон") ||
-                    mainMobileName.getText().contains("телефон");
+                    !mainMobileName.getText().contains("телефон");
         }
         log.info("check if only mobiles");
 
@@ -96,7 +118,56 @@ public class CatalogOnlinerMobilePage extends AbstractPage {
         mobilesName.add(additionalMobileNames.get(0).getText());
         mobilesName.add(mainMobileNames.get(0).getText());
         log.info("take names of two first elements");
+
         return mobilesName;
+    }
+
+    public OfferPage clickOfferButtonOfFirstMobile(){
+        offerButtons.get(0).click();
+        //new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+        log.info("click offers of first mobile");
+        return new OfferPage(driver);
+    }
+
+    public LoginPage clickSignInPage(){
+        signInButton.click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+
+        return new LoginPage(driver);
+    }
+
+    public CatalogOnlinerMobilePage extendProfileInfoClick(){
+        profileInfoButton.click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+
+        return this;
+    }
+
+    public String getUsername(){
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        return usernameElement.getText();
+    }
+
+    public CatalogOnlinerMobilePage openPhonePage(){
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        driver.get("https://catalog.onliner.by/mobile/honor/10xlitednnlx9uz");
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+
+        return this;
+    }
+
+    public LoginPage addInMarks() {
+        markButton.click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+
+        return new LoginPage(driver);
+    }
+
+    public String getUrl() {
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        return driver.getCurrentUrl();
     }
 
     @Override
