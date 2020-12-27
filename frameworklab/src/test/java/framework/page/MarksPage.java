@@ -16,6 +16,15 @@ public class MarksPage extends AbstractPage {
     @FindBy(xpath = "//li/a[@href='/bookmarks/catalog']")
     private WebElement catalogMarksButton;
 
+    @FindBy(xpath = "//div[@class='b-whbd-i']/p")
+    private WebElement noMarksInfo;
+
+    @FindBy(xpath = "//div[@class ='b-pmfilter']")
+    private WebElement chooseAllCheckbox;
+
+    @FindBy(xpath = "//div[@class ='b-pmchk']/a")
+    private WebElement deleteChosenButton;
+
     public MarksPage(WebDriver driver){
         super(driver);
     }
@@ -28,11 +37,31 @@ public class MarksPage extends AbstractPage {
         return this;
     }
 
-    public String openFirstElementAndGetUrl(){
+    public CatalogOnlinerMobilePage openFirstElement(){
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
         nameOfMarkedProducts.get(0).click();
+
+        return new CatalogOnlinerMobilePage(driver);
+    }
+
+    public String noMarksMessage(){
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
-        return driver.getCurrentUrl();
+        return noMarksInfo.getText();
+    }
+
+    public MarksPage chooseAllElements(){
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        chooseAllCheckbox.click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+
+        return this;
+    }
+
+    public MarksPage deleteChosen(){
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        deleteChosenButton.click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        return this;
     }
 
     @Override

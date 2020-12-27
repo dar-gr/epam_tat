@@ -56,6 +56,18 @@ public class CatalogOnlinerMobilePage extends AbstractPage {
     @FindBy(xpath = "//div[@class='schema-product__image']")
     private List<WebElement> productsTitle;
 
+    @FindBy(xpath = "//input[@class='fast-search__input']")
+    private WebElement searchLine;
+
+    @FindBy(xpath = "//div[@class='schema-order']")
+    private WebElement sortMenuButton;
+
+    @FindBy(xpath = "//div[@class='schema-order__item']")
+    private List<WebElement> withFeedback;
+
+    @FindBy(xpath = "//div[@class='schema-product__rating-group']/a")
+    private List<WebElement> feedBackInfoList;
+
     public CatalogOnlinerMobilePage(WebDriver driver){
         super(driver);
         PageFactory.initElements(driver, this);
@@ -168,6 +180,38 @@ public class CatalogOnlinerMobilePage extends AbstractPage {
     public String getUrl() {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
         return driver.getCurrentUrl();
+    }
+
+    public SearchPage searchInput(String searchString){
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        searchLine.sendKeys(searchString);
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        return new SearchPage(driver);
+    }
+
+    public CatalogOnlinerMobilePage openFiltersForList(){
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        sortMenuButton.click();
+
+        return this;
+    }
+
+    public CatalogOnlinerMobilePage clickWithFeedback(){
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        withFeedback.get(3).click();
+
+        return this;
+    }
+
+    public boolean isAllWithFeedBack(){
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        for(WebElement feedBackInfo : feedBackInfoList){
+            new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+            if(feedBackInfo.getText().contains("первый"))
+                return false;
+        }
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        return true;
     }
 
     @Override

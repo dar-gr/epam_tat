@@ -1,5 +1,6 @@
 package framework.test;
 
+import framework.page.AdMobilesPage;
 import framework.page.MarksPage;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -46,6 +47,21 @@ public class CatalogOnlinerTest extends CommonConditions{
     }
 
     @Test
+    public void cleanCompares(){
+        new CatalogOnlinerPage(driver)
+                .openPage();
+        String expectedPage = driver.getCurrentUrl();
+
+        String actualPage = new CatalogOnlinerMobilePage(driver)
+                .openPage()
+                .chooseTwoFirstMobiles()
+                .clickCompare()
+                .cleanCompares();
+        Assert.assertEquals(actualPage, expectedPage);
+
+    }
+
+    /*@Test
     public void filterOfferPage() throws InterruptedException {
         int actualAmountFilteredByDealer = new CatalogOnlinerMobilePage(driver)
                 .openPage()
@@ -57,7 +73,7 @@ public class CatalogOnlinerTest extends CommonConditions{
                 .clickOfferButtonOfFirstMobile()
                 .countOnlyOfficialDealerOffer();
         Assert.assertEquals(actualAmountFilteredByDealer, expectedAmountFilteredByDealer);
-    }
+    }*/
 
     @Test
     public void enteringInvalidUser(){
@@ -67,8 +83,7 @@ public class CatalogOnlinerTest extends CommonConditions{
                 .enterInvalidUser()
                 .signInButtonClick()
                 .isInvalidMessage();
-        String expectedInvalidMessage = "Неверный логин или пароль";
-        Assert.assertEquals(actualInvalidMessageAppear, expectedInvalidMessage);
+        Assert.assertFalse(actualInvalidMessageAppear.isEmpty());
     }
 
     @Test
@@ -82,28 +97,57 @@ public class CatalogOnlinerTest extends CommonConditions{
                 .extendProfileInfoClick()
                 .getUsername();
         Assert.assertEquals(actualUsername, "test1101");
-
     }
 
     @Test
-    public void markerTest(){
+    public void markerAddTest(){
 
-        String expectedNameOfMobile = new CatalogOnlinerMobilePage(driver)
-                .openPhonePage()
-                .getUrl();
+        new CatalogOnlinerMobilePage(driver)
+                .openPhonePage();
+        String expectedNameOfMobile = driver.getCurrentUrl();
         new CatalogOnlinerMobilePage(driver)
                 .addInMarks()
                 .enterUserInfo()
                 .signInButtonClick();
         new CatalogOnlinerMobilePage(driver)
                 .addInMarks();
-        String actualNameOfMobile = new MarksPage(driver)
+        new MarksPage(driver)
                 .openPage()
                 .openCatalogMarks()
-                .openFirstElementAndGetUrl();
+                .openFirstElement();
+        String actualNameOfMobile = driver.getCurrentUrl();
         new CatalogOnlinerMobilePage(driver)
                 .openPhonePage()
                 .addInMarks();
         Assert.assertEquals(actualNameOfMobile, expectedNameOfMobile);
+    }
+
+    @Test
+    public void markerAllDeleteTest() {
+        new CatalogOnlinerMobilePage(driver)
+                .openPhonePage()
+                .addInMarks()
+                .enterUserInfo()
+                .signInButtonClick();
+        new CatalogOnlinerMobilePage(driver)
+                .addInMarks();
+        String actualMessage = new MarksPage(driver)
+                .openPage()
+                .openCatalogMarks()
+                .chooseAllElements()
+                .deleteChosen()
+                .noMarksMessage();
+        Assert.assertFalse(actualMessage.isEmpty());
+    }
+
+    @Test
+    public void adMobilesTest(){
+        String expectedName = new AdMobilesPage(driver)
+                .openPage()
+                .getFirstAdName();
+        String actualName = new AdMobilesPage(driver)
+                .openFirstAd()
+                .getAdName();
+        Assert.assertTrue(actualName.contains(expectedName));
     }
 }

@@ -17,6 +17,9 @@ public class ComparePage extends AbstractPage {
     @FindBy(xpath = "//span[@class='product-summary__caption']")
     private List<WebElement> comparedElementsName;
 
+    @FindBy(xpath = "//div[@class='catalog-masthead__aside']")
+    private WebElement cleanButton;
+
     public ComparePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -35,6 +38,14 @@ public class ComparePage extends AbstractPage {
         log.info("get names of compared elements");
 
         return nameOfElements;
+    }
+
+    public String cleanCompares(){
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        cleanButton.click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+
+        return driver.getCurrentUrl();
     }
 
     @Override
