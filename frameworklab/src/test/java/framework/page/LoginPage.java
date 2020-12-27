@@ -1,5 +1,8 @@
 package framework.page;
 
+import framework.model.User;
+import framework.service.UserCreator;
+import org.graalvm.compiler.lir.LIRInstruction;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,13 +42,13 @@ public class LoginPage extends AbstractPage {
 
     public String isInvalidMessage(){
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        String s = invalidMessage.getText();
-        return s;
+        return invalidMessage.getText();
     }
 
     public LoginPage enterUserInfo(){
-        usernameAndPasswordInput.get(0).sendKeys("test1101");
-        usernameAndPasswordInput.get(1).sendKeys("testtest");
+        User user = UserCreator.withCredentialsFromProperty();
+        usernameAndPasswordInput.get(0).sendKeys(user.getUsername());
+        usernameAndPasswordInput.get(1).sendKeys(user.getPassword());
 
         return this;
     }

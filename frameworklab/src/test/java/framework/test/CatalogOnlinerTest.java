@@ -1,7 +1,9 @@
 package framework.test;
 
+import framework.model.User;
 import framework.page.AdMobilesPage;
 import framework.page.MarksPage;
+import framework.service.UserCreator;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -62,7 +64,7 @@ public class CatalogOnlinerTest extends CommonConditions{
     }
 
     /*@Test
-    public void filterOfferPage() throws InterruptedException {
+    public void filterOfferPage(){
         int actualAmountFilteredByDealer = new CatalogOnlinerMobilePage(driver)
                 .openPage()
                 .clickOfferButtonOfFirstMobile()
@@ -96,7 +98,8 @@ public class CatalogOnlinerTest extends CommonConditions{
         String actualUsername = new CatalogOnlinerMobilePage(driver)
                 .extendProfileInfoClick()
                 .getUsername();
-        Assert.assertEquals(actualUsername, "test1101");
+        User user = UserCreator.withCredentialsFromProperty();
+        Assert.assertEquals(actualUsername, user.getUsername());
     }
 
     @Test

@@ -18,18 +18,11 @@ public class CatalogOnlinerMobileFilteredByMaxPricePage extends AbstractPage{
     private static String messageClassDivXpath = "//div[@class='schema-products__message']";
     private static String productPriceClassDivXpath = "//div[@class='schema-product__price']/a";
 
+
     public CatalogOnlinerMobileFilteredByMaxPricePage(WebDriver driver, String price){
         super(driver);
         this.price = price;
         PageFactory.initElements(driver, this);
-    }
-
-    public List<WebElement> resultList() {
-        logger.info("get web elements of price");
-        return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-                .until(ExpectedConditions
-                        .presenceOfAllElementsLocatedBy(
-                                By.xpath(productPriceClassDivXpath)));
     }
 
     public List<WebElement> noResultMessage(){

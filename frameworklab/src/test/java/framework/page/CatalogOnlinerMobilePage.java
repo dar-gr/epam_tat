@@ -17,9 +17,6 @@ public class CatalogOnlinerMobilePage extends AbstractPage {
     private static final String MOBILEPAGE_URL = "https://catalog.onliner.by/mobile";
     private static Logger log = LogManager.getLogger();
 
-    @FindBy(xpath = "//div[@class='schema-order__button js-schema-aside-open']")
-    private WebElement filterButton;
-
     @FindBy(xpath = "//input[@class='schema-filter-control__item schema-filter__number-input schema-filter__number-input_price']")
     private List<WebElement> priceInput;
 
@@ -50,37 +47,10 @@ public class CatalogOnlinerMobilePage extends AbstractPage {
     @FindBy(xpath = "//li[@id='product-bookmark-control']")
     private WebElement markButton;
 
-    @FindBy(xpath = "//div[@class='catalog-masthead']/h1")
-    private WebElement phoneName;
-
-    @FindBy(xpath = "//div[@class='schema-product__image']")
-    private List<WebElement> productsTitle;
-
-    @FindBy(xpath = "//input[@class='fast-search__input']")
-    private WebElement searchLine;
-
-    @FindBy(xpath = "//div[@class='schema-order']")
-    private WebElement sortMenuButton;
-
-    @FindBy(xpath = "//div[@class='schema-order__item']")
-    private List<WebElement> withFeedback;
-
-    @FindBy(xpath = "//div[@class='schema-product__rating-group']/a")
-    private List<WebElement> feedBackInfoList;
-
     public CatalogOnlinerMobilePage(WebDriver driver){
         super(driver);
         PageFactory.initElements(driver, this);
         log.info("open mobile page");
-    }
-
-    public CatalogOnlinerMobilePage clickFilter(){
-
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
-        filterButton.click();
-        log.info("click filter button");
-
-        return this;
     }
 
     public CatalogOnlinerMobileFilteredByMaxPricePage searchForMaxPriceFilter(String price) {
@@ -136,7 +106,6 @@ public class CatalogOnlinerMobilePage extends AbstractPage {
 
     public OfferPage clickOfferButtonOfFirstMobile(){
         offerButtons.get(0).click();
-        //new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
         log.info("click offers of first mobile");
@@ -175,43 +144,6 @@ public class CatalogOnlinerMobilePage extends AbstractPage {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
 
         return new LoginPage(driver);
-    }
-
-    public String getUrl() {
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
-        return driver.getCurrentUrl();
-    }
-
-    public SearchPage searchInput(String searchString){
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
-        searchLine.sendKeys(searchString);
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
-        return new SearchPage(driver);
-    }
-
-    public CatalogOnlinerMobilePage openFiltersForList(){
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
-        sortMenuButton.click();
-
-        return this;
-    }
-
-    public CatalogOnlinerMobilePage clickWithFeedback(){
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
-        withFeedback.get(3).click();
-
-        return this;
-    }
-
-    public boolean isAllWithFeedBack(){
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
-        for(WebElement feedBackInfo : feedBackInfoList){
-            new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
-            if(feedBackInfo.getText().contains("первый"))
-                return false;
-        }
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
-        return true;
     }
 
     @Override
