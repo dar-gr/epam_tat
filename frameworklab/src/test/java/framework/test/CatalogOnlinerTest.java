@@ -63,7 +63,7 @@ public class CatalogOnlinerTest extends CommonConditions{
 
     }
 
-    /*@Test
+    @Test
     public void filterOfferPage(){
         int actualAmountFilteredByDealer = new CatalogOnlinerMobilePage(driver)
                 .openPage()
@@ -75,7 +75,7 @@ public class CatalogOnlinerTest extends CommonConditions{
                 .clickOfferButtonOfFirstMobile()
                 .countOnlyOfficialDealerOffer();
         Assert.assertEquals(actualAmountFilteredByDealer, expectedAmountFilteredByDealer);
-    }*/
+    }
 
     @Test
     public void enteringInvalidUser(){
